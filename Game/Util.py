@@ -21,4 +21,6 @@ def check_for_identical_rows(board):
         return True
 
 
-
+def pos_to_coord(position):
+    row, col = position
+    return row * 3 + col
