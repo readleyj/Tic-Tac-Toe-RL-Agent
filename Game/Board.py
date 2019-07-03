@@ -7,6 +7,7 @@ class Board:
         self.state = '123456789'
         self.all_moves = [[x, y] for x in range(3) for y in range(3)]
         self.available_moves = self.all_moves
+        self.game_result = 'IN-PROGRESS'
 
     def is_position_empty(self, position):
         return position in self.available_moves
@@ -15,7 +16,7 @@ class Board:
         self.available_moves.remove(position)
         self.state = util.change_board_state(self.state, position, letter)
         row, col = position
-        self.board[row - 1][col - 1] = player_letter
+        self.board[row - 1][col - 1] = letter
 
     def change_board_state(current_state, position, letter):
         state_number = self.all_moves.index(position)
@@ -23,5 +24,5 @@ class Board:
             letter + current_state[state_number + 1:]
         self.state = new_state
 
-    def game_over(self):
-        return check_for_identical_rows(self.board)
+    def check_for_win(self, letter):
+        reward_next_state = 

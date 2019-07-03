@@ -1,20 +1,35 @@
+import random
 import Agent.Agent
 from Util import pos_to_coord
+import numpy as np
 
 
 class TabularQAgent(Agent.Agent):
-    def __init__(self, letter, epsilon=0.1, alpha=0.8):
-        self.letter = letter
+    def __init__(self, side, epsilon=0.1, alpha=0.8, gamma=0.7):
+        self.side = side
         self.epsilon = epsilon
         self.alpha = alpha
+        self.gamma = gamma
         self.value_table = dict()
 
     def make_move(self, available_moves, current_state):
-        if current_state in self.value_table:
-            # Use numpy arrays
-            move_values = self.value_table[current_state]
-            possible_moves = [pos_to_coord(value) for value in available_moves]
-            # possible_move_values = [poss]
-        
-    def learn_from_move(self):
-        pass
+        if (current_state not in self.value_table):
+            self.value_table.update({current_state: np.random.rand(9)})
+
+        while True:
+            if (random.random() < self.epsilon):
+                action_index = random.randint(0, 9)
+            else:
+                action_index = np.argmax(self.value_table[current_state])
+
+            if (pos_to_coord(action_index) not in available_moves):
+                self.value_table[current_state][action_index] = -1.0
+            else:
+                break
+        learn_from_move(action_index, current_state)
+
+    def learn_from_move(self, action_index, current_state, board):
+        action_coord = pos_to_coord(action_index)
+        reward, next_state = board.
+        action_value = self.value_table[current_state][action_index]
+        td_error
