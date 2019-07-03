@@ -5,5 +5,3 @@ class TabularQAgent:
         self.letter = letter
         self.epsilon = epsilon
         self.alpha = alpha
-
-        

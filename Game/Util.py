@@ -1,16 +1,3 @@
-from enum import Enum
-
-
-class BoardIndexes(Enum):
-    '01' = 0
-    '02' = 1
-    '03' = 2
-    '10' = 3
-    '11' = 4
-    '12' = 5
-    '20' = 6
-    '21' = 7
-    '22' = 8
 
 
 def all_elems_equal(seq):
@@ -34,9 +21,4 @@ def check_for_identical_rows(board):
         return True
 
 
-def change_board_state(current_state, row, col, letter):
-    index_string = str(row) + str(col)
-    state_number = BoardIndexes.index_string
-    new_state = current_state[:state_number] + \
-        letter + current_state[state_number + 1:]
-    return new_state
+
