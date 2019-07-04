@@ -30,3 +30,7 @@ class Environment:
             if (self.board.draw):
                 self.set_rewards(-1.0, -1.0)
                 break
+
+        def train(num_episodes=3000):
+            for episode in num_episodes:
+                run_game()
