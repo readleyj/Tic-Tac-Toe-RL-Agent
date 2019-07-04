@@ -6,7 +6,9 @@ class Board:
         self.board = [['-', '-', '-'] for i in range(3)]
         self.state = '123456789'
         self.all_moves = [[x, y] for x in range(3) for y in range(3)]
-        self.available_moves = self.all_moves
+        self.valid_moves = self.all_moves
+        self.winner = None
+        self.draw = False
 
     def is_position_empty(self, position):
         return position in self.available_moves

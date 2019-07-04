@@ -7,5 +7,4 @@ class Agent(ABC):
         pass
 
     @abstractmethod
-    def reset_parameters(self):
-        pass
+    def learn_from_move(next_state)
