@@ -7,22 +7,22 @@ class Board:
         self.state = '123456789'
         self.all_moves = [[x, y] for x in range(3) for y in range(3)]
         self.available_moves = self.all_moves
-        self.game_result = 'IN-PROGRESS'
 
     def is_position_empty(self, position):
         return position in self.available_moves
 
-    def set_position_value(self, position, letter):
+    def set_position_value(self, position, side):
         self.available_moves.remove(position)
-        self.state = util.change_board_state(self.state, position, letter)
+        self.state = util.change_board_state(self.state, position, side)
         row, col = position
-        self.board[row - 1][col - 1] = letter
+        self.board[row - 1][col - 1] = side
+        return self.state
 
-    def change_board_state(current_state, position, letter):
+    def change_board_state(current_state, position, side):
         state_number = self.all_moves.index(position)
         new_state = current_state[:state_number] + \
-            letter + current_state[state_number + 1:]
+            side + current_state[state_number + 1:]
         self.state = new_state
 
     def check_for_win(self, letter):
-        reward_next_state = 
+        pass

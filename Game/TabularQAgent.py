@@ -26,10 +26,12 @@ class TabularQAgent(Agent.Agent):
                 self.value_table[current_state][action_index] = -1.0
             else:
                 break
-        learn_from_move(action_index, current_state)
 
-    def learn_from_move(self, action_index, current_state, board):
         action_coord = pos_to_coord(action_index)
-        reward, next_state = board.
+        board.set_position_value(action_coord, self.side)
+
+    def learn_from_move(self, action_index, current_state, next_state, reward):
+        action_coord = pos_to_coord(action_index)
+        reward, next_state = board.set_position_value(action_coord, self.side)
         action_value = self.value_table[current_state][action_index]
         td_error

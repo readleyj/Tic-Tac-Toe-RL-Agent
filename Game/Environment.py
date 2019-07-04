@@ -1,4 +1,4 @@
-import Board as from Board
+import Board from Board
 
 
 class Environment:
@@ -6,3 +6,8 @@ class Environment:
         self.board = Board()
         self.player1 = player1
         self.player2 = player2
+        self.player_1_turn = True
+        self.available_moves = board.available_moves
+        self.current_state = board.current_state
+
+    def step(self):
