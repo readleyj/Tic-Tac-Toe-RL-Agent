@@ -12,6 +12,7 @@ class TabularQAgent(Agent.Agent):
         self.gamma = gamma
         self.value_table = dict()
         self.current_state = None
+        self.current_action_index = None
 
     def make_move(self, available_moves, current_state):
         if (current_state not in self.value_table):
@@ -31,8 +32,11 @@ class TabularQAgent(Agent.Agent):
         action_coord = pos_to_coord(action_index)
         board.set_position_value(action_coord, self.side)
         self.current_state = board.current_state
+        self.current_action_index = action_index
 
-    def learn_from_move(self, action_index, next_state, reward):
-        action_coord = pos_to_coord(action_index)
-        action_value = self.value_table[current_state][action_index]
-        td_error
+    def learn_from_move(self, next_state, reward):
+        action_coord = pos_to_coord(self.action_index)
+        action_value = self.value_table[self.current_state][action_index]
+
+    def stop_exploring(self):
+        self.epsilon = 0
