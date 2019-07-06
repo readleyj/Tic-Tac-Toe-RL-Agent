@@ -40,7 +40,7 @@ class TabularQAgent(Agent.Agent):
         max_action_index = np.argmax(self.value_table[next_state])
 
         action_value += self.alpha * \
-            (reward + self.value_table[next_state]
+            (reward + self.gamma * self.value_table[next_state]
              [max_action_index] - action_value)
 
         self.value_table[self.current_state][self.action_index] = action_value
