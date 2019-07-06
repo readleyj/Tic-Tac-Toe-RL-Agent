@@ -37,6 +37,7 @@ class Environment:
 
     def train(self, num_episodes=5000):
             for episode in range(num_episodes):
+                print('Epoch number {}'.format(episode))
                 self.run_game()
 
     def stop_exploring(self, *agents):

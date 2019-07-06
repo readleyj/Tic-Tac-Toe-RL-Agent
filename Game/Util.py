@@ -1,10 +1,10 @@
 
 
-def all_elems_equal(seq):
-    return seq.count(seq[0]) == len(seq) and seq[0] != '-'
+def all_equal(seq, elem):
+    return seq.count(elem) == len(seq)
 
 
-def check_for_identical_rows(board):
+def check_for_identical_rows(board, elem):
     top_row = board[0]
     middle_row = board[1]
     bottom_row = board[2]
@@ -14,10 +14,10 @@ def check_for_identical_rows(board):
     right_diagonal = [board[x][x] for x in range(3)]
     left_diagonal = [board[2 - x][x] for x in range(3)]
 
-    if (all_elems_equal(top_row) or all_elems_equal(middle_row) or
-        all_elems_equal(bottom_row) or all_elems_equal(left_column) or
-        all_elems_equal(middle_column) or all_elems_equal(right_column) or
-            all_elems_equal(right_diagonal) or all_elems_equal(left_diagonal)):
+    if (all_equal(top_row, elem) or all_equal(middle_row, elem) or
+        all_equal(bottom_row, elem) or all_equal(left_column, elem) or
+        all_equal(middle_column, elem) or all_equal(right_column, elem) or
+            all_equal(right_diagonal, elem) or all_equal(left_diagonal, elem)):
         return True
 
 

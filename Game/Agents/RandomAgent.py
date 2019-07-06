@@ -6,11 +6,11 @@ class RandomAgent(Agent):
     def __init__(self, side):
         self.side = side
 
-    def make_move(self, valid_moves, board):
-        next_move = random.choice(valid_moves)
+    def make_move(self, board):
+        next_move = random.choice(board.valid_moves)
         board.set_position_value(next_move, self.side)
 
-    def learn_from_move(self, next_state):
+    def learn_from_move(self, next_state, reward):
         pass
 
     def stop_exploring(self):

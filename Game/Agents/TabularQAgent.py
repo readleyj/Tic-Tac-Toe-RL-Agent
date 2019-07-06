@@ -14,16 +14,21 @@ class TabularQAgent(Agent):
         self.previous_state = None
         self.action_index = None
 
+    def get_q_values(self, state):
+        if (state not in self.value_table):
+            self.value_table.update({state: np.random.rand(9)})
+
+        return self.value_table[state]
+
     def make_move(self, board):
         current_state = board.state
-        if (current_state not in self.value_table):
-            self.value_table.update({current_state: np.random.rand(9)})
+        q_vals = self.get_q_values(current_state)
 
         while True:
             if (random.random() < self.epsilon):
                 action_index = random.randint(0, 9)
             else:
-                action_index = np.argmax(self.value_table[current_state])
+                action_index = np.argmax(q_vals)
 
             if (pos_to_coord(action_index) not in board.valid_moves):
                 self.value_table[current_state][action_index] = -1.0
@@ -32,17 +37,17 @@ class TabularQAgent(Agent):
 
         action_coord = pos_to_coord(action_index)
         board.set_position_value(action_coord, self.side)
-        self.previous_state = board.state
+        self.previous_state = current_state
         self.action_index = action_index
 
     def learn_from_move(self, next_state, reward):
         action_coord = pos_to_coord(self.action_index)
         action_value = self.value_table[self.previous_state][self.action_index]
-        max_action_index = np.argmax(self.value_table[next_state])
+        q_vals = self.get_q_values(next_state)
+        max_action_index = np.argmax(q_vals)
 
         action_value += self.alpha * \
-            (reward + self.gamma * self.value_table[next_state]
-             [max_action_index] - action_value)
+            (reward + self.gamma * q_vals[max_action_index] - action_value)
 
         self.value_table[self.previous_state][self.action_index] = action_value
 
