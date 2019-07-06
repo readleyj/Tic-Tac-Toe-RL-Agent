@@ -40,3 +40,7 @@ class Environment:
         def train(num_episodes=3000):
             for episode in num_episodes:
                 run_game()
+
+        def stop_exploring(*agents):
+            for agent in agents:
+                agent.stop_exploring()

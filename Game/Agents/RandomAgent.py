@@ -10,5 +10,5 @@ class RandomAgent(Agent.Agent):
         next_move = random.choice(available_moves)
         board.set_position_value(next_move, self.letter)
 
-    def reset_parameters(self):
+    def stop_exploring(self):
         pass

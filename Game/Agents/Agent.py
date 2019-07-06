@@ -9,3 +9,7 @@ class Agent(ABC):
     @abstractmethod
     def learn_from_move(next_state):
         pass
+
+    @abstractmethod
+    def stop_exploring(self):
+        pass
