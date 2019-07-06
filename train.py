@@ -1,9 +1,10 @@
-from Game import Environment
-from Game.Agents import TabularQAgent, RandomAgent
+from Game.Environment import Environment
+from Game.Agents.TabularQAgent import TabularQAgent
+from Game.Agents.RandomAgent import RandomAgent
 
 
-agent_1 = TabularQAgent()
-agent_2 = RandomAgent()
+agent_1 = TabularQAgent(side='X')
+agent_2 = RandomAgent(side='O')
 test_env = Environment(agent_1, agent_2)
 
-test_env.
+test_env.train()
