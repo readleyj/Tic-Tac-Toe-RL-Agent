@@ -15,9 +15,12 @@ class TabularQAgent(Agent):
         self.previous_state = None
         self.action_index = None
 
-    def get_q_values(self, state):
+    def get_q_values(self, state, final=False):
         if (state not in self.value_table):
-            self.value_table.update({state: np.random.rand(9)})
+            if (final):
+                self.value_table.update({state: np.zeros(9)})
+            else:
+                self.value_table.update({state: np.random.rand(9)})
 
         return self.value_table[state]
 
@@ -32,7 +35,7 @@ class TabularQAgent(Agent):
                 action_index = np.argmax(q_vals)
 
             if (pos_to_coord(action_index) not in board.valid_moves):
-                self.value_table[current_state][action_index] = -1.0
+                self.value_table[current_state][action_index] = -10.0
             else:
                 break
 
@@ -41,15 +44,15 @@ class TabularQAgent(Agent):
         self.previous_state = current_state
         self.action_index = action_index
 
-    def learn_from_move(self, next_state, reward):
+    def learn_from_move(self, next_state, reward, final=False):
         action_coord = pos_to_coord(self.action_index)
         action_value = self.value_table[self.previous_state][self.action_index]
-        q_vals = self.get_q_values(next_state)
+        q_vals = self.get_q_values(next_state, final)
         max_action_index = np.argmax(q_vals)
 
         action_value += self.alpha * \
             (reward + self.gamma * q_vals[max_action_index] - action_value)
-        
+
         self.value_table[self.previous_state][self.action_index] = action_value
 
     def stop_exploring(self):

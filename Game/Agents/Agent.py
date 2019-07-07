@@ -7,7 +7,7 @@ class Agent(ABC):
         pass
 
     @abstractmethod
-    def learn_from_move(self, next_state):
+    def learn_from_move(self, next_state, reward):
         pass
 
     @abstractmethod

@@ -10,7 +10,7 @@ class RandomAgent(Agent):
         next_move = random.choice(board.valid_moves)
         board.set_position_value(next_move, self.side)
 
-    def learn_from_move(self, next_state, reward):
+    def learn_from_move(self, next_state, reward, final):
         pass
 
     def stop_exploring(self):

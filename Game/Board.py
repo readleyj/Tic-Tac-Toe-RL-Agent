@@ -31,4 +31,3 @@ class Board:
         else:
             if (not self.valid_moves):
                 self.result = 'DRAW'
-
