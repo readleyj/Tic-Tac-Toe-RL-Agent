@@ -5,6 +5,7 @@ import numpy as np
 
 
 class TabularQAgent(Agent):
+
     def __init__(self, side, epsilon=0.1, alpha=0.8, gamma=0.7):
         self.side = side
         self.epsilon = epsilon
@@ -26,7 +27,7 @@ class TabularQAgent(Agent):
 
         while True:
             if (random.random() < self.epsilon):
-                action_index = random.randint(0, 9)
+                action_index = random.randint(0, 8)
             else:
                 action_index = np.argmax(q_vals)
 
@@ -48,7 +49,7 @@ class TabularQAgent(Agent):
 
         action_value += self.alpha * \
             (reward + self.gamma * q_vals[max_action_index] - action_value)
-
+        
         self.value_table[self.previous_state][self.action_index] = action_value
 
     def stop_exploring(self):

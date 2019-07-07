@@ -18,8 +18,6 @@ class Environment:
             self.set_rewards(-1.0, 1.0)
         elif (self.board.result == 'DRAW'):
             self.set_rewards(-1.0, -1.0)
-        else:
-            self.set_rewards(0, 0)
 
     def run_game(self):
         while(self.board.result is None):
@@ -27,18 +25,25 @@ class Environment:
 
             self.check_game_result()
             if (self.board.result):
+                self.board = Board()
                 break
 
             self.player2.make_move(self.board)
 
             self.check_game_result()
             if(self.board.result):
+                self.board = Board()
                 break
+
+            self.set_rewards(0, 0)
 
     def train(self, num_episodes=5000):
             for episode in range(num_episodes):
-                print('Epoch number {}'.format(episode))
                 self.run_game()
+
+            # print(self.player1.value_table)
+            print('Q Table for second player')
+            print(self.player2.value_table)
 
     def stop_exploring(self, *agents):
             for agent in agents:

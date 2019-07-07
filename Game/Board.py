@@ -6,7 +6,6 @@ class Board:
         self.board = [['-', '-', '-'] for i in range(3)]
         self.state = '012345678'
         self.all_moves = [[x, y] for x in range(3) for y in range(3)]
-        # Consider using list(self.all_moves) instead
         self.valid_moves = self.all_moves[:]
         self.result = None
 
@@ -32,3 +31,4 @@ class Board:
         else:
             if (not self.valid_moves):
                 self.result = 'DRAW'
+
