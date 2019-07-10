@@ -6,6 +6,7 @@ class Environment:
         self.board = Board()
         self.player1 = player1
         self.player2 = player2
+        self.results = []
 
     def set_rewards(self, agent_one_reward, agent_two_reward, final=False):
         self.player1.learn_from_move(self.board.state, agent_one_reward, final)
@@ -25,6 +26,7 @@ class Environment:
 
             self.check_game_result()
             if (self.board.result):
+                self.results.append(self.board.result)
                 self.board = Board()
                 break
 
@@ -32,6 +34,7 @@ class Environment:
 
             self.check_game_result()
             if(self.board.result):
+                self.results.append(self.board.result)
                 self.board = Board()
                 break
 
@@ -40,6 +43,14 @@ class Environment:
     def train(self, num_episodes=5000):
         for episode in range(num_episodes):
             self.run_game()
+
+        x_wins = (self.results.count(self.player1.side) / num_episodes) * 100
+        y_wins = (self.results.count(self.player2.side) / num_episodes) * 100
+        draws = 100 - x_wins - y_wins
+        print('Total games of {} games played'.format(num_episodes))
+        print('X won {0:.2f}% of the games'.format(x_wins))
+        print('Y won {0:.2f}% of the games'.format(y_wins))
+        print('{0:.2f}% of the games were draws'.format(draws))
 
     def stop_exploring(self, *agents):
         for agent in agents:
