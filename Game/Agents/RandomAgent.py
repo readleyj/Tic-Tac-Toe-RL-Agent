@@ -15,3 +15,6 @@ class RandomAgent(Agent):
 
     def stop_exploring(self):
         pass
+
+    def save_values(self):
+        pass

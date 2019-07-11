@@ -1,3 +1,4 @@
+import json
 
 
 def all_equal(seq, elem):
@@ -28,3 +29,9 @@ def coord_to_pos(coord):
 
 def pos_to_coord(position):
     return [position // 3, position % 3]
+
+
+def save_to_json(path, file_name, data):
+    file_path_name = path + '/' + file_name + '.json'
+    with open(file_path_name, 'w') as fp:
+        json.dump(data, fp)

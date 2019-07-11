@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from ..Util import save_to_json
 
 
 class Agent(ABC):
@@ -13,3 +14,8 @@ class Agent(ABC):
     @abstractmethod
     def stop_exploring(self):
         pass
+
+    def save_values(self):
+        file_string = self.__class__.__name__
+        path = '../../trained'
+        save_to_json(path, file_string, self.value_table)

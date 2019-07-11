@@ -40,7 +40,7 @@ class Environment:
 
             self.set_rewards(0, 0)
 
-    def train(self, num_episodes=5000):
+    def train(self, num_episodes=5000, save=False):
         for episode in range(num_episodes):
             self.run_game()
 
@@ -52,6 +52,10 @@ class Environment:
         print('Y won {0:.2f}% of the games'.format(y_wins))
         print('{0:.2f}% of the games were draws'.format(draws))
 
-    def stop_exploring(self, *agents):
+        if (save):
+            self.player1.save_values()
+            self.player2.save_values()
+
+    def stop_exploring(self, *agents):  
         for agent in agents:
             agent.stop_exploring()

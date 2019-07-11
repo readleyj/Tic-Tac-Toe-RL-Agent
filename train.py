@@ -4,7 +4,7 @@ from Game.Agents.RandomAgent import RandomAgent
 
 
 agent_1 = TabularQAgent(side='X')
-agent_2 = RandomAgent(side='O')
+agent_2 = TabularQAgent(side='O')
 test_env = Environment(agent_1, agent_2)
 
-test_env.train(5000)
+test_env.train(10000)
