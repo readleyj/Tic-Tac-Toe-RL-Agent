@@ -31,6 +31,6 @@ def pos_to_coord(position):
     return [position // 3, position % 3]
 
 
-def save_to_json(path, file_name, data):
+def save_to_npy(path, file_name, data):
     file_path_name = path + '/' + file_name + '.npy'
     np.save(file_path_name, data)

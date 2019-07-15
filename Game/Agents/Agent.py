@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..Util import save_to_json
+from ..Util import save_to_npy
 
 
 class Agent(ABC):
@@ -19,4 +19,4 @@ class Agent(ABC):
         cls_name = self.__class__.__name__
         file_string = cls_name + '_' + self.side
         path = './trained/' + cls_name
-        save_to_json(path, file_string, self.value_table)
+        save_to_npy(path, file_string, self.value_table)
