@@ -57,5 +57,3 @@ class TabularQAgent(Agent):
 
     def stop_exploring(self):
         self.epsilon = 0
-
-        

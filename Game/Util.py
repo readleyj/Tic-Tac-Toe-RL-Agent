@@ -1,4 +1,4 @@
-import json
+import numpy as np
 
 
 def all_equal(seq, elem):
@@ -32,6 +32,5 @@ def pos_to_coord(position):
 
 
 def save_to_json(path, file_name, data):
-    file_path_name = path + '/' + file_name + '.json'
-    with open(file_path_name, 'w') as fp:
-        json.dump(data, fp)
+    file_path_name = path + '/' + file_name + '.npy'
+    np.save(file_path_name, data)

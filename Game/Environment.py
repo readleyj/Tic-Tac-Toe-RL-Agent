@@ -56,6 +56,6 @@ class Environment:
             self.player1.save_values()
             self.player2.save_values()
 
-    def stop_exploring(self, *agents):  
+    def stop_exploring(self, *agents):
         for agent in agents:
             agent.stop_exploring()

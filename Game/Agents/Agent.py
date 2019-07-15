@@ -16,6 +16,7 @@ class Agent(ABC):
         pass
 
     def save_values(self):
-        file_string = self.__class__.__name__
-        path = '../../trained'
+        cls_name = self.__class__.__name__
+        file_string = cls_name + '_' + self.side
+        path = './trained/' + cls_name
         save_to_json(path, file_string, self.value_table)
