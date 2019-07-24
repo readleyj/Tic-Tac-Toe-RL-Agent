@@ -49,7 +49,7 @@ class Environment:
         draws = 100 - x_wins - y_wins
         print('Total games of {} games played'.format(num_episodes))
         print('X won {0:.2f}% of the games'.format(x_wins))
-        print('Y won {0:.2f}% of the games'.format(y_wins))
+        print('O won {0:.2f}% of the games'.format(y_wins))
         print('{0:.2f}% of the games were draws'.format(draws))
 
         if (save):
