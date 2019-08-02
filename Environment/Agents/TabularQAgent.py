@@ -7,7 +7,7 @@ import numpy as np
 class TabularQAgent(Agent):
 
     def __init__(self, side, epsilon=0.1, alpha=0.8, gamma=0.7):
-        self.side = side
+        super().__init__(side)
         self.epsilon = epsilon
         self.alpha = alpha
         self.gamma = gamma

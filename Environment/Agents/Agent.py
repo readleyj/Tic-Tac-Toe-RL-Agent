@@ -1,17 +1,18 @@
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 from ..Util import save_to_npy
 
 
-class Agent(ABC):
-    @abstractmethod
+class Agent:
+
+    def __init__(self, side):
+        self.side = side
+
     def make_move(self, available_moves):
         pass
 
-    @abstractmethod
     def learn_from_move(self, next_state, reward):
         pass
 
-    @abstractmethod
     def stop_exploring(self):
         pass
 
