@@ -44,6 +44,11 @@ class Environment:
         for episode in range(num_episodes):
             self.run_game()
 
+            if (episode % 1000 == 0):
+                completion_pct = (episode / num_episodes) * 100
+                print('Episode: {}'.format(episode))
+                print('{0:.2f}% complete'.format(completion_pct))
+
         x_wins = (self.results.count(self.player1.side) / num_episodes) * 100
         y_wins = (self.results.count(self.player2.side) / num_episodes) * 100
         draws = 100 - x_wins - y_wins

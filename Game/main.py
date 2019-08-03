@@ -24,7 +24,7 @@ clock = pygame.time.Clock()
 
 game_board = Board()
 agent_1 = TabularQAgent.from_saved(side='X')
-agent_2 = RandomAgent(side='O')
+agent_2 = TabularQAgent.from_saved(side='O')
 
 
 def load_and_transform_image(path, width, height):
@@ -86,21 +86,29 @@ def check_game_result():
         print('Game in progress')
 
 
+def render():
+    screen.blit(background, (0, 0))
+    pygame.display.flip()
+
+
 def run_game(agent_1, agent_2):
     while(game_board.result is None):
         agent_1.make_move(game_board)
         draw_marker(game_board.last_move_index, agent_1.side)
+        render()
+        time.sleep(1)
+        check_game_result()
 
-        if(game_board.result):
-            print(game_board.result)
+        if (game_board.result):
             break
 
         agent_2.make_move(game_board)
         draw_marker(game_board.last_move_index, agent_2.side)
+        render()
+        time.sleep(1)
         check_game_result()
 
-        if(game_board.result):
-            print(game_board.result)
+        if (game_board.result):
             break
 
 
@@ -109,9 +117,6 @@ draw_vertical_lines()
 
 
 while True:
-    clock.tick(1)
-    screen.blit(background, (0, 0))
-    pygame.display.flip()
     run_game(agent_1, agent_2)
 
     for evt in pygame.event.get():

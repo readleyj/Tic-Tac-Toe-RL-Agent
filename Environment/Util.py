@@ -2,8 +2,6 @@ import numpy as np
 
 
 def all_equal(seq, elem):
-    # print('Testing {} for win'.format(elem))
-    # print(seq)
     return seq.count(elem) == len(seq)
 
 
@@ -21,7 +19,6 @@ def check_for_identical_rows(board, elem):
         all_equal(bottom_row, elem) or all_equal(left_column, elem) or
         all_equal(middle_column, elem) or all_equal(right_column, elem) or
             all_equal(right_diagonal, elem) or all_equal(left_diagonal, elem)):
-        print(board)
         return True
 
 
