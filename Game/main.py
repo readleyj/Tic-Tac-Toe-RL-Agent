@@ -2,10 +2,12 @@ import pygame
 import constants
 import sys
 from os import path
+import time
 
 sys.path.append('..')
+from Environment.Agents.TabularQAgent import TabularQAgent
+from Environment.Agents.RandomAgent import RandomAgent
 from Environment.Board import Board
-from Environment import Agents
 
 
 background_color = constants.ANTIQUE_WHITE
@@ -18,6 +20,12 @@ background = pygame.Surface(constants.SIZE)
 background = background.convert()
 background.fill(background_color)
 
+clock = pygame.time.Clock()
+
+game_board = Board()
+agent_1 = TabularQAgent.from_saved(side='X')
+agent_2 = RandomAgent(side='O')
+
 
 def load_and_transform_image(path, width, height):
     image = pygame.image.load(path)
@@ -26,8 +34,10 @@ def load_and_transform_image(path, width, height):
     return image
 
 
-X = load_and_transform_image(constants.X_PATH, 160, 160)
-O = load_and_transform_image(constants.O_PATH, 160, 160)
+X = load_and_transform_image(
+    constants.X_PATH, constants.MARKER_SIZE, constants.MARKER_SIZE)
+O = load_and_transform_image(
+    constants.O_PATH, constants.MARKER_SIZE, constants.MARKER_SIZE)
 
 
 def draw_vertical_lines():
@@ -54,15 +64,44 @@ def determine_quad(mouse_pos):
                 return index, quad
 
 
-def draw_marker(quad, side):
+def draw_marker(quad_index, side):
     if (side == 'X'):
         marker = X
     elif (side == 'O'):
         marker = O
-
+    quad = constants.BOUNDARIES[quad_index]
     marker_pos = (quad[0][0] + constants.MARKER_MARGIN,
                   quad[1][0] + constants.MARKER_MARGIN)
     background.blit(marker, marker_pos)
+
+
+def check_game_result():
+    if (game_board.result == agent_1.side):
+        print('X Won')
+    elif (game_board.result == agent_2.side):
+        print('O won')
+    elif (game_board.result == 'DRAW'):
+        print('Draw')
+    else:
+        print('Game in progress')
+
+
+def run_game(agent_1, agent_2):
+    while(game_board.result is None):
+        agent_1.make_move(game_board)
+        draw_marker(game_board.last_move_index, agent_1.side)
+
+        if(game_board.result):
+            print(game_board.result)
+            break
+
+        agent_2.make_move(game_board)
+        draw_marker(game_board.last_move_index, agent_2.side)
+        check_game_result()
+
+        if(game_board.result):
+            print(game_board.result)
+            break
 
 
 draw_horizontal_lines()
@@ -70,18 +109,26 @@ draw_vertical_lines()
 
 
 while True:
+    clock.tick(1)
     screen.blit(background, (0, 0))
     pygame.display.flip()
+    run_game(agent_1, agent_2)
 
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif evt.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = evt.pos
-            index, quad = determine_quad(mouse_pos)
-            draw_marker(quad, 'O')
 
 
-def run_game():
-    pass
+    
+
+
+
+
+
+
+
+#         elif evt.type == pygame.MOUSEBUTTONDOWN:
+#             mouse_pos = evt.pos
+#             index, quad = determine_quad(mouse_pos)
+#             draw_marker(quad, 'O')

@@ -1,4 +1,4 @@
-from .Util import check_for_identical_rows
+from .Util import check_for_identical_rows, coord_to_pos
 
 
 class Board:
@@ -8,6 +8,7 @@ class Board:
         self.all_moves = [[x, y] for x in range(3) for y in range(3)]
         self.valid_moves = self.all_moves[:]
         self.result = None
+        self.last_move_index = None
 
     def is_position_empty(self, position):
         return position in self.valid_moves
@@ -16,7 +17,9 @@ class Board:
         self.valid_moves.remove(position)
         self.change_board_state(self.state, position, side)
         row, col = position
-        self.board[row - 1][col - 1] = side
+        self.board[row][col] = side
+        # Added this for pygame. There's probably a better way
+        self.last_move_index = coord_to_pos(position)
         self.check_for_win(side)
 
     def change_board_state(self, current_state, position, side):

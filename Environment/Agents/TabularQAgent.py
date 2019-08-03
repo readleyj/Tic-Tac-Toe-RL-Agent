@@ -15,6 +15,13 @@ class TabularQAgent(Agent):
         self.previous_state = None
         self.action_index = None
 
+    @classmethod
+    def from_saved(cls, side):
+        q_agent = cls(side, epsilon=0, alpha=0, gamma=0)
+        q_table = q_agent.load_values()
+        q_agent.value_table = q_table
+        return q_agent
+
     def get_q_values(self, state, final=False):
         if (state not in self.value_table):
             if (final):
