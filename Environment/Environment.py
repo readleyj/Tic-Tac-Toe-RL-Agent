@@ -18,7 +18,7 @@ class Environment:
         elif (self.board.result == self.player2.side):
             self.set_rewards(-1.0, 1.0, final=True)
         elif (self.board.result == 'DRAW'):
-            self.set_rewards(-1.0, -1.0, final=True)
+            self.set_rewards(0, 0, final=True)
 
     def run_game(self):
         while(self.board.result is None):
