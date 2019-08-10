@@ -22,15 +22,15 @@ def check_for_identical_rows(board, elem):
         return True
 
 
-def coord_to_pos(position):
-    row, col = position
+def coord_to_pos(coord):
+    row, col = coord
     return row * 3 + col
 
 
 def pos_to_coord(position):
     return [position // 3, position % 3]
 
-
+    
 def save_to_npy(path, file_name, data):
     file_path_name = path + '/' + file_name + '.npy'
     np.save(file_path_name, data)

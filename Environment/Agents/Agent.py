@@ -21,9 +21,9 @@ class Agent:
     def save_values(self):
         cls_name = self.__class__.__name__
         file_string = cls_name + '_' + self.side
-        # Fix the paths
-        path = './trained/' + cls_name
-        save_to_npy(path, file_string, self.value_table)
+        path = '../../trained/' + cls_name
+        full_path = os.path.join(dir, path)
+        save_to_npy(full_path, file_string, self.value_table)
 
     def load_values(self):
         cls_name = self.__class__.__name__
