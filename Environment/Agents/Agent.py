@@ -1,5 +1,7 @@
-# from abc import ABC, abstractmethod
+import os
 from ..Util import save_to_npy, load_npy
+
+dir = os.path.dirname(__file__)
 
 
 class Agent:
@@ -26,6 +28,6 @@ class Agent:
     def load_values(self):
         cls_name = self.__class__.__name__
         file_string = cls_name + '_' + self.side + '.npy'
-        # Fix the paths
-        path = '../trained/' + cls_name + '/' + file_string
-        return load_npy(path).item()
+        path = '../../trained/' + cls_name + '/' + file_string
+        full_path = os.path.join(dir, path)
+        return load_npy(full_path).item()
