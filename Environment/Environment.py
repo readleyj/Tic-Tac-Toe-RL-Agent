@@ -36,9 +36,7 @@ class Environment:
             if (self.total_moves != 1):
                 self.next_player.learn_from_move(self.board, 0, final=False)
 
-            temp = self.current_player
-            self.current_player = self.next_player
-            self.next_player = temp
+            self.current_player, self.next_player = self.next_player, self.current_player
 
     def train(self, num_episodes=5000, save=False):
         for episode in range(num_episodes):

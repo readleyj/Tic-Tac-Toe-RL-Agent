@@ -1,7 +1,7 @@
 import random
+import numpy as np
 from .Agent import Agent
 from ..Util import pos_to_coord
-import numpy as np
 
 
 class TabularQAgent(Agent):
